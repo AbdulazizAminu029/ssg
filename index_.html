@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office of the Secretary to the State Government | Kano State Government</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== CSS VARIABLES & RESET ===== */
+        :root {
+            --color-primary: #0A2342;
+            --color-secondary: #F5F5F0;
+            --color-accent: #C5A574;
+            --color-accent-dark: #A88C5D;
+            --color-dark: #1A1A1A;
+            --color-light: #FFFFFF;
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow: 0 10px 30px rgba(10, 35, 66, 0.1);
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: var(--color-dark);
+            background: var(--color-light);
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); }
+        h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); }
+        h3 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+        h4 { font-size: clamp(1.4rem, 2.5vw, 1.8rem); }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+            font-weight: 300;
+        }
+
+        /* ===== LAYOUT & CONTAINERS ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 8rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+        }
+
+        .section-title p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* ===== PREMIUM NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            z-index: 10000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(197, 165, 116, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            background: var(--color-primary);
+            border: 2px solid var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-accent);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text span:first-child {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            letter-spacing: 1px;
+        }
+
+        .logo-text span:last-child {
+            font-size: 0.8rem;
+            color: var(--color-accent-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-primary);
+            font-weight: 400;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--color-accent);
+        }
+
+        /* ===== LUXURY HERO SECTION ===== */
+        .hero {
+            height: 100vh;
+            min-height: 900px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, #0d2b52 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"></feTurbulence></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.1"></rect></pattern></defs><rect width="100" height="100" fill="url(%23grain)"></rect></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--color-light);
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 2rem;
+            color: var(--color-light);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero-content h1 span {
+            display: block;
+            font-size: 0.6em;
+            letter-spacing: 6px;
+            margin-top: 1rem;
+            color: var(--color-accent);
+            font-weight: 400;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            font-weight: 300;
+            animation: fadeInUp 1.2s ease 0.3s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.2s ease 0.6s both;
+        }
+
+        /* ===== LUXURY BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.3rem 3rem;
+            border: none;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-primary);
+            border: 1px solid var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-light);
+            border: 1px solid var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-accent);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        /* ===== PERMANENT SECRETARIES SECTION ===== */
+        .secretaries {
+            background: var(--color-secondary);
+            position: relative;
+        }
+
+        .secretaries::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(10, 35, 66, 0.03)"/></svg>');
+            background-size: cover;
+        }
+
+        .secretaries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .secretary-card {
+            background: var(--color-light);
+            padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(197, 165, 116, 0.2);
+        }
+
+        .secretary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+        }
+
+        .secretary-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(10, 35, 66, 0.15);
+        }
+
+        .secretary-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: var(--color-accent);
+            font-size: 2rem;
+            border: 2px solid var(--color-accent);
+        }
+
+        .secretary-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .secretary-card .position {
+            color: var(--color-accent-dark);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .secretary-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        /* ===== EXECUTIVE OFFICES SECTION ===== */
+        .offices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .office-card {
+            background: var(--color-light);
+            padding: 0;
+            border: 1px solid rgba(197, 165, 116, 0.2);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .office-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(10, 35, 66, 0.15);
+        }
+
+        .office-header {
+            background: var(--color-primary);
+            color: var(--color-light);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .office-header h3 {
+            color: var(--color-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .office-header .subtitle {
+            color: var(--color-accent);
+            font-style: italic;
+        }
+
+        .office-body {
+            padding: 2.5rem;
+        }
+
+        .responsibilities-list {
+            list-style: none;
+        }
+
+        .responsibilities-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .responsibilities-list li:last-child {
+            border-bottom: none;
+        }
+
+        .responsibilities-list li::before {
+            content: '•';
+            color: var(--color-accent);
+            font-weight: bold;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* ===== PREMIUM CONTACT SECTION ===== */
+        .contact {
+            background: var(--color-secondary);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: var(--color-primary);
+            color: var(--color-light);
+            padding: 4rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--color-accent);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .contact-info h3 {
+            color: var(--color-light);
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            position: relative;
+        }
+
+        .contact-info > p {
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            font-size: 1.2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2.5rem;
+            gap: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            min-width: 30px;
+            color: var(--color-accent);
+            margin-top: 0.3rem;
+        }
+
+        .contact-detail h4 {
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-detail p {
+            opacity: 0.9;
+            line-height: 1.6;
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .contact-form {
+            background: var(--color-light);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h3 {
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+            position: relative;
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+            color: var(--color-primary);
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            transition: var(--transition);
+            background: var(--color-secondary);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(197, 165, 116, 0.1);
+            background: var(--color-light);
+        }
+
+        .form-group textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1.5rem center;
+            background-size: 1em;
+        }
+
+        /* ===== LUXURY FOOTER ===== */
+        .footer {
+            background: var(--color-primary);
+            color: var(--color-light);
+            padding: 6rem 0 3rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h3 {
+            color: var(--color-light);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--color-accent);
+        }
+
+        .footer-col h4 {
+            color: var(--color-accent);
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 2rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-col a {
+            color: var(--color-light);
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.9;
+            font-size: 1.1rem;
+            display: inline-block;
+        }
+
+        .footer-col a:hover {
+            color: var(--color-accent);
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-contact .icon {
+            color: var(--color-accent);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+            min-width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-copyright p {
+            margin: 0;
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-light);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .footer-social a:hover {
+            background: var(--color-accent);
+            color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 3rem;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+            
+            .section-padding {
+                padding: 6rem 0;
+            }
+            
+            .secretaries-grid,
+            .offices-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Premium Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-img">KSG</div>
+                <div class="logo-text">
+                    <span>OFFICE OF THE SSG</span>
+                    <span>Kano State Government</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#secretaries" class="nav-link">Leadership</a></li>
+                <li><a href="#offices" class="nav-link">Directorates</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Luxury Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>OFFICE OF THE SECRETARY<br>TO THE STATE GOVERNMENT<span>Kano State</span></h1>
+            <p>Excellence in governance, service to the people, and sustainable development of Kano State</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Contact The Office</a>
+                <a href="#secretaries" class="btn btn-secondary">Meet The Leadership</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Permanent Secretaries Section -->
+    <section id="secretaries" class="secretaries section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Executive Leadership</h2>
+                <p>The distinguished Permanent Secretaries overseeing the core directorates of the SSG's Office</p>
+            </div>
+
+            <div class="secretaries-grid">
+                <div class="secretary-card">
+                    <div class="secretary-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Alhaji Musa Bello</h3>
+                    <div class="position">Permanent Secretary</div>
+                    <p>Admin & General Services Directorate. Oversees human resources, administration, and general services for the entire government structure.</p>
+                </div>
+
+                <div class="secretary-card">
+                    <div class="secretary-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Dr. Aisha Mohammed</h3>
+                    <div class="position">Permanent Secretary</div>
+                    <p>REPA Directorate. Manages planning, research, and economic affairs to drive the state's development agenda forward.</p>
+                </div>
+
+                <div class="secretary-card">
+                    <div class="secretary-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Alhaji Sani Ibrahim</h3>
+                    <div class="position">Permanent Secretary</div>
+                    <p>Council Affairs Directorate. Coordinates between the executive and legislative arms of government and manages council matters.</p>
+                </div>
+
+                <div class="secretary-card">
+                    <div class="secretary-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Chief (Mrs) Funmilayo Adekunle</h3>
+                    <div class="position">Permanent Secretary</div>
+                    <p>Special Services Directorate. Handles special projects, protocols, and exceptional services for the state government.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directorates Section -->
+    <section id="offices" class="offices section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Executive Directorates</h2>
+                <p>The four pillars of administrative excellence in the Kano State Government</p>
+            </div>
+
+            <div class="offices-grid">
+                <div class="office-card">
+                    <div class="office-header">
+                        <h3>Admin & General Services</h3>
+                        <div class="subtitle">The Operational Backbone</div>
+                    </div>
+                    <div class="office-body">
+                        <ul class="responsibilities-list">
+                            <li>Human Resources Management & Development</li>
+                            <li>General Administration & Office Services</li>
+                            <li>Staff Welfare & Benefits Administration</li>
+                            <li>Records Management & Documentation</li>
+                            <li>Logistics & Procurement Services</li>
+                            <li>Facility Management & Maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="office-card">
+                    <div class="office-header">
+                        <h3>REPA Directorate</h3>
+                        <div class="subtitle">Research, Planning & Economic Affairs</div>
+                    </div>
+                    <div class="office-body">
+                        <ul class="responsibilities-list">
+                            <li>Strategic Planning & Policy Development</li>
+                            <li>Economic Research & Analysis</li>
+                            <li>Data Management & Statistics</li>
+                            <li>Development Project Coordination</li>
+                            <li>Inter-Agency Collaboration</li>
+                            <li>Performance Monitoring & Evaluation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="office-card">
+                    <div class="office-header">
+                        <h3>Council Affairs</h3>
+                        <div class="subtitle">Legislative-Executive Relations</div>
+                    </div>
+                    <div class="office-body">
+                        <ul class="responsibilities-list">
+                            <li>Legislative Liaison & Coordination</li>
+                            <li>Council Proceedings Management</li>
+                            <li>Policy Implementation Oversight</li>
+                            <li>Inter-Governmental Relations</li>
+                            <li>Stakeholder Engagement</li>
+                            <li>Legal & Regulatory Compliance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="office-card">
+                    <div class="office-header">
+                        <h3>Special Services</h3>
+                        <div class="subtitle">Exceptional Government Services</div>
+                    </div>
+                    <div class="office-body">
+                        <ul class="responsibilities-list">
+                            <li>Special Projects Management</li>
+                            <li>Protocol & VIP Services</li>
+                            <li>Crisis Management & Resolution</li>
+                            <li>Special Investigations & Inquiries</li>
+                            <li>Interstate & International Relations</li>
+                            <li>Confidential & Sensitive Operations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Contact Section -->
+    <section id="contact" class="contact section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact The Executive Office</h2>
+                <p>Reach out to the appropriate directorate for efficient service delivery</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Our offices are open during standard government working hours. We welcome inquiries from the public, media, and government agencies.</p>
+
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Main Office Address</h4>
+                            <p>Office of the Secretary to the State Government<br>Kano State Government Secretariat<br>Kano, Nigeria</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>General Enquiries</h4>
+                            <p>+234 64 320 0000<br>+234 64 320 0001</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email Address</h4>
+                            <p>info@kanossg.gov.ng<br>secretary@kanossg.gov.ng</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Working Hours</h4>
+                            <p>Monday - Friday: 8:00 AM - 4:00 PM<br>Saturday & Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send an Official Message</h3>
+                    <form id="ssgContactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Select Directorate *</label>
+                            <select id="department" name="department" required>
+                                <option value="">-- Select Directorate --</option>
+                                <option value="admin">Admin & General Services</option>
+                                <option value="repa">REPA Directorate</option>
+                                <option value="council">Council Affairs</option>
+                                <option value="special">Special Services</option>
+                                <option value="office">SSG's Office</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Official Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div style="width: 60px; height: 60px; background: var(--color-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-primary); font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">KSG</div>
+                    </div>
+                    <h3>Office of the SSG</h3>
+                    <p>Kano State Government Secretariat<br>Kano, Nigeria</p>
+                    <p>Promoting excellence in governance and sustainable development of Kano State through effective coordination and administration.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Directorates</h4>
+                    <ul>
+                        <li><a href="#">Admin & General Services</a></li>
+                        <li><a href="#">REPA Directorate</a></li>
+                        <li><a href="#">Council Affairs</a></li>
+                        <li><a href="#">Special Services</a></li>
+                        <li><a href="#">Office of the SSG</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#secretaries">Leadership</a></li>
+                        <li><a href="#offices">Directorates</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">News & Updates</a></li>
+                        <li><a href="#">Government Portal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact Information</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Kano State Government Secretariat, Kano</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fas fa-phone"></i></span>
+                            <span>+234 64 320 0000</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fas fa-envelope"></i></span>
+                            <span>info@kanossg.gov.ng</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fas fa-clock"></i></span>
+                            <span>Mon - Fri: 8:00AM - 4:00PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Office of the Secretary to the State Government, Kano State. All Rights Reserved.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form validation
+        document.getElementById('ssgContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message. This has been received by the Office of the Secretary to the State Government.');
+            this.reset();
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '0.8rem 0';
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.padding = '1rem 0';
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official website of the Office of the Secretary to the State Government, Kano State Government">
+    <title>Office of the Secretary to the State Government - Kano State Government</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --kano-primary: #006837;
+            --kano-primary-dark: #004d29;
+            --kano-secondary: #4CAF50;
+            --kano-accent: #D4AF37;
+            --kano-accent-dark: #b8941f;
+            --kano-dark: #2C3E50;
+            --kano-dark-light: #3a506b;
+            --kano-light: #F8F9FA;
+            --kano-white: #FFFFFF;
+            --kano-border: #E9ECEF;
+            --kano-card-shadow: rgba(0, 104, 55, 0.08);
+            --kano-card-hover: rgba(0, 104, 55, 0.12);
+            --kano-overlay: rgba(0, 0, 0, 0.7);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Add reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        
+        /* Add focus styles for accessibility */
+        a:focus, button:focus, input:focus, select:focus, textarea:focus {
+            outline: 2px solid var(--kano-accent);
+            outline-offset: 2px;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--kano-dark);
+            padding-top: 100px;
+            background-color: var(--kano-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--kano-primary);
+        }
+        
+        .bg-kano-primary { background-color: var(--kano-primary) !important; }
+        .bg-kano-primary-dark { background-color: var(--kano-primary-dark) !important; }
+        .bg-kano-light { background-color: var(--kano-light) !important; }
+        .text-kano-primary { color: var(--kano-primary) !important; }
+        .text-kano-accent { color: var(--kano-accent) !important; }
+        
+        /* Improved Top Bar */
+        .top-bar {
+            font-size: 0.85rem;
+            background: linear-gradient(90deg, var(--kano-primary), var(--kano-primary-dark));
+            padding: 8px 0;
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .top-bar a {
+            transition: var(--transition);
+        }
+        
+        .top-bar a:hover {
+            color: var(--kano-accent) !important;
+        }
+        
+        /* Enhanced Navigation */
+        .navbar {
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            background: var(--kano-white);
+            padding: 0;
+            transition: var(--transition);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        
+        .navbar-brand {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .state-logo {
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .nav-link {
+            font-weight: 600;
+            color: var(--kano-dark) !important;
+            margin: 0 5px;
+            position: relative;
+            padding: 25px 15px !important;
+            transition: var(--transition);
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--kano-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after, .nav-link.active:after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--kano-primary) !important;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 2px var(--kano-accent);
+        }
+        
+        /* Enhanced Hero Section */
+        .hero {
+            background: linear-gradient(var(--kano-overlay), var(--kano-overlay)), url('https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            padding: 120px 0 100px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 104, 55, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            color: white;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: 0.95;
+        }
+        
+        /* Improved Section Titles */
+        .section-title {
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 2.2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--kano-accent);
+            border-radius: 2px;
+        }
+        
+        /* Enhanced Cards */
+        .directorate-card, .news-card, .resource-card {
+            transition: var(--transition);
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px var(--kano-card-shadow);
+            margin-bottom: 20px;
+            background: white;
+        }
+        
+        .directorate-card:hover, .news-card:hover, .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px var(--kano-card-hover);
+        }
+        
+        .directorate-card {
+            border-top: 4px solid var(--kano-primary);
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .directorate-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--kano-primary);
+            transition: var(--transition);
+        }
+        
+        .directorate-card:hover .directorate-icon {
+            transform: scale(1.1);
+            color: var(--kano-secondary);
+        }
+        
+        /* Improved Profile Images */
+        .profile-img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            transition: var(--transition);
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        
+        /* Enhanced Spacing - Reduced from original */
+        .section {
+            padding: 70px 0;
+        }
+        
+        .ps-name {
+            font-style: italic;
+            color: var(--kano-secondary);
+            font-weight: 600;
+            border-top: 1px solid var(--kano-border);
+            padding-top: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--kano-secondary);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        /* Improved Function Items */
+        .function-item {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 18px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .function-item:before {
+            content: '✓';
+            color: var(--kano-primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        
+        /* Enhanced Stats */
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--kano-primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .stats-label {
+            font-size: 1rem;
+            color: var(--kano-dark);
+            font-weight: 500;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, var(--kano-primary) 0%, var(--kano-primary-dark) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+        
+        .stats-section .stats-number {
+            color: white;
+        }
+        
+        .stats-section .stats-label {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Improved Footer */
+        footer {
+            background: linear-gradient(135deg, var(--kano-primary) 0%, var(--kano-primary-dark) 100%);
+            color: white;
+            padding: 60px 0 25px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+        
+        footer > .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--kano-accent);
+            transform: translateX(5px);
+        }
+        
+        /* Enhanced Buttons */
+        .btn-kano {
+            background: linear-gradient(135deg, var(--kano-primary), var(--kano-primary-dark));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 104, 55, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-kano::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--kano-primary-dark), var(--kano-primary));
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .btn-kano:hover::before {
+            width: 100%;
+        }
+        
+        .btn-kano:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 104, 55, 0.35);
+            color: white;
+        }
+        
+        .btn-outline-kano {
+            border: 2px solid var(--kano-primary);
+            color: var(--kano-primary);
+            background: transparent;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-outline-kano:hover {
+            background: var(--kano-primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 104, 55, 0.2);
+        }
+        
+        /* Improved Mission Statement */
+        .mission-statement {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid var(--kano-primary);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .mission-statement::after {
+            content: '"';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            color: rgba(0, 104, 55, 0.1);
+            line-height: 1;
+        }
+        
+        /* Enhanced Gallery */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 104, 55, 0.88);
+            color: white;
+            padding: 12px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Enhanced Resource Icons */
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--kano-primary);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        
+        .resource-card:hover .resource-icon {
+            color: var(--kano-secondary);
+            transform: scale(1.1);
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background: var(--kano-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--kano-primary-dark);
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        /* Social media icons */
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background: var(--kano-accent);
+            transform: translateY(-3px);
+        }
+        
+        /* News ticker */
+        .news-ticker {
+            background: var(--kano-primary);
+            color: white;
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .news-ticker-content {
+            display: flex;
+            animation: ticker 30s linear infinite;
+            white-space: nowrap;
+        }
+        
+        .news-ticker-content:hover {
+            animation-play-state: paused;
+        }
+        
+        .news-ticker-item {
+            padding: 0 25px;
+            font-size: 0.85rem;
+        }
+        
+        .news-ticker-item a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .news-ticker-item a:hover {
+            color: var(--kano-accent);
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* Add print styles */
+        @media print {
+            .top-bar, .navbar, .hero, footer, .btn, .back-to-top, .news-ticker {
+                display: none !important;
+            }
+            
+            body {
+                padding-top: 0;
+                background: white;
+            }
+            
+            .section {
+                padding: 20px 0 !important;
+                page-break-inside: avoid;
+            }
+            
+            a[href]:after {
+                content: " (" attr(href) ")";
+            }
+        }
+        
+        /* Better spacing for mobile */
+        @media (max-width: 992px) {
+            .nav-link {
+                padding: 12px 15px !important;
+            }
+            
+            .navbar-collapse {
+                background: white;
+                padding: 15px;
+                border-radius: 0 0 10px 10px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            .state-logo {
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 90px;
+            }
+            
+            .hero {
+                padding: 100px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+            
+            .mission-statement {
+                padding: 20px;
+                font-size: 1rem;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .state-logo {
+                height: 45px;
+                margin-right: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .state-logo {
+                height: 40px;
+            }
+            
+            .navbar-brand span.fw-bold {
+                font-size: 1.1rem;
+            }
+            
+            .navbar-brand small {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable position-absolute top-0 start-0 bg-kano-primary text-white p-2" style="z-index: 10000; transform: translateY(-100%); transition: transform 0.3s ease;">Skip to main content</a>
+    
+    <!-- Top Bar -->
+    <div class="top-bar py-2 text-white" aria-label="Top information bar">
+        <div class="container">
+            <div class="d-md-flex justify-content-between align-items-center">
+                <div class="mb-2 mb-md-0">
+                    <span><i class="fas fa-clock me-1" aria-hidden="true"></i> Monday - Friday: 8:00 AM - 5:00 PM</span>
+                </div>
+                <div class="d-flex">
+                    <a href="tel:+23464123456" class="text-white me-3 text-decoration-none"><i class="fas fa-phone-alt me-1" aria-hidden="true"></i> <span>+234 (0) 64 123 456</span></a>
+                    <a href="mailto:info@ssg.kanostate.gov.ng" class="text-white text-decoration-none"><i class="fas fa-envelope me-1" aria-hidden="true"></i> <span>info@ssg.kanostate.gov.ng</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Ticker -->
+    <div class="news-ticker" aria-label="News ticker">
+        <div class="news-ticker-content">
+            <div class="news-ticker-item"><a href="#"><i class="fas fa-bullhorn me-2"></i> SSG to inaugurate committee on multi-sectoral investment strategic plan - April 10, 2025</a></div>
+            <div class="news-ticker-item"><a href="#"><i class="fas fa-bullhorn me-2"></i> Release of 2025 Q1 Budget Performance Report - April 18, 2025</a></div>
+            <div class="news-ticker-item"><a href="#"><i class="fas fa-bullhorn me-2"></i> Circular on Public Holiday Declaration - April 15, 2025</a></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand" href="#" aria-label="Office of the SSG, Kano State Government">
+                <div class="d-flex align-items-center">
+                    <!-- Kano State Logo -->
+                    <img src="kano_logo.jpg" alt="Kano State Logo" class="state-logo">
+                    <div>
+                        <span class="fw-bold fs-4 text-kano-primary">Office of the SSG</span>
+                        <br>
+                        <small class="text-muted">Kano State Government</small>
+                    </div>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#" aria-current="page">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">The SSG</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#directorates">Directorates</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#functions">Functions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-kano btn-sm ms-2 px-3" href="#search"><i class="fas fa-search me-1"></i> Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" role="banner">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Office of the Secretary to the State Government</h1>
+            <p class="lead fs-5 mb-5">Coordinating the machinery of government for sustainable development and welfare of the people of Kano State</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="#directorates" class="btn btn-lg px-4 py-3" style="background: linear-gradient(135deg, var(--kano-accent), var(--kano-accent-dark)); color: var(--kano-dark); font-weight: 700;">Explore Our Directorates <i class="fas fa-arrow-down ms-2" aria-hidden="true"></i></a>
+                <a href="#contact" class="btn btn-outline-light btn-lg px-4 py-3">Contact Us <i class="fas fa-envelope ms-2" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main id="main-content">
+        <!-- Stats Section -->
+        <section class="stats-section py-4" aria-label="Statistics">
+            <div class="container py-4">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stats-number" id="counter1">0</div>
+                        <div class="stats-label">MDA's</div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stats-number" id="counter2">0</div>
+                        <div class="stats-label">Directorates</div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stats-number" id="counter3">0</div>
+                        <div class="stats-label">Staff Members</div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stats-number" id="counter4">0</div>
+                        <div class="stats-label">Years of Service</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="py-5">
+            <div class="container py-4">
+                <h2 class="section-title">Our Mandate & Vision</h2>
+                <div class="mission-statement">
+                    <p>The Office of the Secretary to the State Government is established to provide strategic leadership and coordinate the activities of Ministries, Departments, and Agencies (MDAs) of the Kano State Government to ensure the effective formulation and execution of government policies, programs, and projects.</p>
+                    <p class="mb-0">Our vision is to be the most efficient and effective central coordinating body for the implementation of the state's development agenda, ensuring good governance and improved service delivery to the people of Kano State.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The SSG Section -->
+        <section id="about" class="py-5 bg-kano-light">
+            <div class="container py-4">
+                <h2 class="section-title">The Secretary to the State Government</h2>
+                <div class="row align-items-center">
+                    <div class="col-md-5 mb-4 mb-md-0">
+                        <img src="ssg_portrait.jpg" alt="Portrait of the Secretary to the State Government of Kano State" class="profile-img">
+                    </div>
+                    <div class="col-md-7">
+                        <h3 class="text-kano-primary">Alh Umar Farouk Ibrahim</h3>
+                        <p class="lead">A distinguished public servant with over 35 years of experience in governance and administration.</p>
+                        <p>Mr. Farouk was appointed Secretary to the State Government of Kano State in 2025, bringing a wealth of experience from his previous roles as Permanent Secretary of various ministries. He holds a Masters in Public Administration from Ahmadu Bello University, Zaria.</p>
+                        <p>As SSG, he provides strategic leadership and oversees the coordination of all Ministries, Departments, and Agencies (MDAs) to ensure the effective implementation of the state government's policies and programs. His office plays a pivotal role in the administration and coordination of government activities.</p>
+                        <div class="mt-4">
+                            <a href="#" class="btn btn-outline-kano me-3"><i class="far fa-file-pdf me-2"></i> Download Profile</a>
+                            <a href="#" class="btn btn-kano"><i class="fas fa-download me-2"></i> Full Biography</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Directorates Section -->
+        <section id="directorates" class="py-5">
+            <div class="container py-4">
+                <h2 class="section-title">Directorates Under the SSG's Office</h2>
+                <p class="text-center text-muted lead mb-5">The administrative engine of the state, comprising four specialized directorates each headed by a Permanent Secretary.</p>
+
+                <div class="row g-4">
+                    <!-- REPA -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 directorate-card">
+                            <div class="card-body text-center d-flex flex-column">
+                                <div class="directorate-icon"><i class="fas fa-chart-line"></i></div>
+                                <h4 class="text-kano-primary">REPA</h4>
+                                <h6 class="text-muted mb-3">Planning, Research & Statistics</h6>
+                                <ul class="list-unstyled text-start mb-3">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> State Development Planning</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Budget Formulation & M&E</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Socio-Economic Research</li>
+                                    <li><i class="fas fa-check-circle text-kano-secondary me-2"></i> Statistical Data Management</li>
+                                </ul>
+                                <div class="ps-name mt-auto">Permanent Secretary: Alhaji Umar Muhammad Jao</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Special Duties -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 directorate-card">
+                            <div class="card-body text-center d-flex flex-column">
+                                <div class="directorate-icon"><i class="fas fa-tasks"></i></div>
+                                <h4 class="text-kano-primary">Special Duties</h4>
+                                <h6 class="text-muted mb-3">Special Projects & Interventions</h6>
+                                <ul class="list-unstyled text-start mb-3">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Governor's Special Assignments</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Federal Government Liaison</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> State Parastatals Oversight</li>
+                                    <li><i class="fas fa-check-circle text-kano-secondary me-2"></i> Emergency & Incident Management</li>
+                                </ul>
+                                <div class="ps-name mt-auto">Permanent Secretary: Hajiya Bilkisu Maimota</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 directorate-card">
+                            <div class="card-body text-center d-flex flex-column">
+                                <div class="directorate-icon"><i class="fas fa-cogs"></i></div>
+                                <h4 class="text-kano-primary">Admin & General Services</h4>
+                                <h6 class="text-muted mb-3">Administration & Logistics</h6>
+                                <ul class="list-unstyled text-start mb-3">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Human Resource Management</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Procurement & Logistics</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Protocol & Official Events</li>
+                                    <li><i class="fas fa-check-circle text-kano-secondary me-2"></i> Asset & Facility Management</li>
+                                </ul>
+                                <div class="ps-name mt-auto">Permanent Secretary: Alhaji Umar Muhammad Jalo</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Council Affairs -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 directorate-card">
+                            <div class="card-body text-center d-flex flex-column">
+                                <div class="directorate-icon"><i class="fas fa-university"></i></div>
+                                <h4 class="text-kano-primary">Council Affairs</h4>
+                                <h6 class="text-muted mb-3">Local Government Coordination</h6>
+                                <ul class="list-unstyled text-start mb-3">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> State-LG Council Liaison</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Policy Implementation Monitoring</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-kano-secondary me-2"></i> Review of LG Council Resolutions</li>
+                                    <li><i class="fas fa-check-circle text-kano-secondary me-2"></i> Quarterly Chairmen Meetings</li>
+                                </ul>
+                                <div class="ps-name mt-auto">Permanent Secretary: Hajiya Bilkisu Maimota</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="py-5 bg-kano-light">
+            <div class="container py-4">
+                <h2 class="section-title">Resources & Documents</h2>
+                
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <h3 class="text-kano-primary mb-4">Budget Allocations</h3>
+                        <div class="resource-card card mb-4">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="resource-icon me-4">
+                                        <i class="fas fa-file-invoice-dollar"></i>
+                                    </div>
+                                    <div>
+                                        <h5>2025 Budget Proposal</h5>
+                                        <p class="mb-2">Detailed breakdown of the proposed budget for the 2025 fiscal year</p>
+                                        <a href="#" class="btn btn-sm btn-outline-kano">Download PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="resource-icon me-4">
+                                        <i class="fas fa-chart-pie"></i>
+                                    </div>
+                                    <div>
+                                        <h5>2024 Budget Performance</h5>
+                                        <p class="mb-2">Q3 report on budget implementation and performance</p>
+                                        <a href="#" class="btn btn-sm btn-outline-kano">Download PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h3 class="text-kano-primary mb-4">Policies & Laws</h3>
+                        <div class="resource-card card mb-4">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="resource-icon me-4">
+                                        <i class="fas fa-gavel"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Kano State Government Laws</h5>
+                                        <p class="mb-2">Compilation of enacted laws and regulations</p>
+                                        <a href="#" class="btn btn-sm btn-outline-kano">View Documents</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="resource-icon me-4">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Government Policies</h5>
+                                        <p class="mb-2">Official policy documents and implementation guidelines</p>
+                                        <a href="#" class="btn btn-sm btn-outline-kano">View Policies</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+                
+                <div class="text-center">
+                    <a href="#" class="btn btn-kano"><i class="fas fa-archive me-2"></i> View All Resources</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news" class="py-5">
+            <div class="container py-4">
+                <h2 class="section-title">News & Press Releases</h2>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card news-card h-100">
+                            <div class="card-body">
+                                <span class="news-date"><i class="far fa-calendar-alt me-1"></i> April 18, 2025</span>
+                                <h5 class="mt-2">Release of 2025 Q1 Budget Performance Report</h5>
+                                <p class="card-text">The REPA directorate has published the budget implementation report for the first quarter of 2025, showing significant progress in capital projects execution.</p>
+                                <a href="#" class="btn btn-outline-kano btn-sm">Download Report (PDF)</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card news-card h-100">
+                            <div class="card-body">
+                                <span class="news-date"><i class="far fa-calendar-alt me-1"></i> April 15, 2025</span>
+                                <h5 class="mt-2">Circular on Public Holiday Declaration</h5>
+                                <p class="card-text">A circular from the Admin directorate announces the public holidays for May 2025 and provides guidance on work schedule adjustments.</p>
+                                <a href="#" class="btn btn-outline-kano btn-sm">View Circular</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card news-card h-100">
+                            <div class="card-body">
+                                <span class="news-date"><i class="far fa-calendar-alt me-1"></i> April 10, 2025</span>
+                                <h5 class="mt-2">SSG Inaugurates Five-year Multi-Sectoral Investment Strategic Plan Committee</h5>
+                                <p class="card-text">The 17-man committee members were stategically drawn from the development and private sectors, academia, including Ministries, Departments and Agencies (MDA) and Kano Emirate Council.</p>
+                                <a href="#" class="btn btn-outline-kano btn-sm">Read Communique</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="#" class="btn btn-kano px-4">View All News & Archives</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-5 bg-kano-light">
+            <div class="container py-4">
+                <h2 class="section-title">Photo Gallery</h2>
+                <p class="text-center text-muted lead mb-5">Moments from official functions and activities of the SSG's office</p>
+                
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="gallery-item">
+                            <img src="ssg1.jpg" alt="SSG meeting with stakeholders">
+                            <div class="gallery-caption">Official ceremony at the government house</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="gallery-item">
+                            <img src="ssg2.jpg" alt="Official ceremony">
+                            <div class="gallery-caption">SSG meeting with local government chairmen</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="gallery-item">
+                            <img src="ssg3.jpg" alt="Project inspection">
+                            <div class="gallery-caption">SSG inspecting ongoing projects in the state</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="#" class="btn btn-kano"><i class="fas fa-camera me-2"></i> View Full Gallery</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5">
+            <div class="container py-4">
+                <h2 class="section-title">Contact The Directorate</h2>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-5">
+                                <form id="contactForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="name" class="form-label">Full Name *</label>
+                                            <input type="text" class="form-control" id="name" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">Email Address *</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="department" class="form-label">Directorate</label>
+                                        <select class="form-select" id="department">
+                                            <option value="">Select Directorate</option>
+                                            <option value="repa">REPA Directorate</option>
+                                            <option value="special">Special Duties</option>
+                                            <option value="admin">Admin & General Services</option>
+                                            <option value="council">Council Affairs</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="subject" class="form-label">Subject *</label>
+                                        <input type="text" class="form-control" id="subject" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message" class="form-label">Message *</label>
+                                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-kano px-4">Send Message</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-5">
+                            <div class="col-md-4 text-center mb-4">
+                                <div class="bg-kano-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                    <i class="fas fa-map-marker-alt fs-4"></i>
+                                </div>
+                                <h5>Office Address</h5>
+                                <p>Office of the SSG<br>Kano State Government Secretariat<br>State Road, Kano, Nigeria</p>
+                            </div>
+                            <div class="col-md-4 text-center mb-4">
+                                <div class="bg-kano-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                    <i class="fas fa-phone-alt fs-4"></i>
+                                </div>
+                                <h5>Phone Numbers</h5>
+                                <p>+234 (0) 80 0000 0000<br>+234 (0) 80 0000 0000<br>+234 (0) 80 0000 0000</p>
+                            </div>
+                            <div class="col-md-4 text-center mb-4">
+                                <div class="bg-kano-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                    <i class="fas fa-envelope fs-4"></i>
+                                </div>
+                                <h5>Email Addresses</h5>
+                                <p>info@ssg.kanostate.gov.ng<br>ssg.office@kanostate.gov.ng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pt-5" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white mb-4">Office of the Secretary to the State Government</h5>
+                    <p>Kano State Government Secretariat,<br>State Road, Kano, Nigeria.</p>
+                    <p><i class="fas fa-phone-alt me-2"></i> +234 (0) 64 123 456<br>
+                    <i class="fas fa-envelope me-2"></i> info@ssg.kanostate.gov.ng</p>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <div class="footer-links">
+                        <a href="#">Home</a>
+                        <a href="#about">The SSG</a>
+                        <a href="#directorates">Directorates</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="text-white mb-4">Directorates</h5>
+                    <div class="footer-links">
+                        <a href="#">REPA</a>
+                        <a href="#">Special Duties</a>
+                        <a href="#">Admin & General Services</a>
+                        <a href="#">Council Affairs</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h5 class="text-white mb-4">Connect With Us</h5>
+                    <div class="d-flex mb-3">
+                        <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon me-2"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon me-2"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="mb-2">Subscribe to our newsletter:</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Your Email">
+                        <button class="btn btn-light" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; 2025 Office of the Secretary to the State Government, Kano State. All Rights Reserved. | <a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms of Use</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Script -->
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to top button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Counter animation for stats
+            function animateCounter(elementId, finalValue, duration) {
+                let startTime = null;
+                const element = document.getElementById(elementId);
+                const startValue = 0;
+                
+                function step(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    const progress = Math.min((timestamp - startTime) / duration, 1);
+                    const value = Math.floor(progress * (finalValue - startValue) + startValue);
+                    element.textContent = value;
+                    
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        element.textContent = finalValue;
+                    }
+                }
+                
+                window.requestAnimationFrame(step);
+            }
+            
+            // Start counter animation when stats section is in view
+            const statsSection = document.querySelector('.stats-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter('counter1', 52, 2000);
+                        animateCounter('counter2', 4, 1500);
+                        animateCounter('counter3', 150, 2500);
+                        animateCounter('counter4', 35, 1800);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+
+            // Form handling
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message. This is a demonstration - your message has not been sent.');
+                    this.reset();
+                });
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerOffset = 100;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Animation on scroll with performance optimization
+            let ticking = false;
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.directorate-card, .news-card, .resource-card, .gallery-item');
+                
+                elements.forEach(element => {
+                    const position = element.getBoundingClientRect();
+                    
+                    // If element is in viewport
+                    if(position.top < window.innerHeight - 100) {
+                        element.style.opacity = 1;
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                ticking = false;
+            };
+
+            // Set initial state for animation
+            window.addEventListener('load', function() {
+                const elements = document.querySelectorAll('.directorate-card, .news-card, .resource-card, .gallery-item');
+                elements.forEach(element => {
+                    element.style.opacity = 0;
+                    element.style.transform = 'translateY(20px)';
+                    element.style.transition = 'all 0.6s ease';
+                });
+                
+                // Trigger animation
+                setTimeout(animateOnScroll, 100);
+            });
+
+            // Listen for scroll events with requestAnimationFrame for performance
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(function() {
+                        animateOnScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.style.padding = '5px 0';
+                    navbar.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
+                } else {
+                    navbar.style.padding = '';
+                    navbar.style.boxShadow = '0 2px 15px rgba(0,0,0,0.08)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
