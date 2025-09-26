@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vehicle fleet management dashboard for the Office of the Secretary to the State Government, Kano State Government">
+    <title>Vehicle Fleet Dashboard - Office of the SSG, Kano State</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --kano-primary: #006837;
+            --kano-primary-dark: #004d29;
+            --kano-secondary: #4CAF50;
+            --kano-accent: #D4AF37;
+            --kano-accent-dark: #b8941f;
+            --kano-dark: #2C3E50;
+            --kano-dark-light: #3a506b;
+            --kano-light: #F8F9FA;
+            --kano-white: #FFFFFF;
+            --kano-border: #E9ECEF;
+            --kano-card-shadow: rgba(0, 104, 55, 0.08);
+            --kano-card-hover: rgba(0, 104, 55, 0.12);
+            --kano-overlay: rgba(0, 0, 0, 0.7);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Add reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        
+        /* Add focus styles for accessibility */
+        a:focus, button:focus, input:focus, select:focus, textarea:focus {
+            outline: 2px solid var(--kano-accent);
+            outline-offset: 2px;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--kano-dark);
+            background-color: #f5f7f9;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--kano-primary);
+        }
+        
+        .bg-kano-primary { background-color: var(--kano-primary) !important; }
+        .bg-kano-primary-dark { background-color: var(--kano-primary-dark) !important; }
+        .bg-kano-light { background-color: var(--kano-light) !important; }
+        .text-kano-primary { color: var(--kano-primary) !important; }
+        .text-kano-accent { color: var(--kano-accent) !important; }
+        
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, var(--kano-primary) 0%, var(--kano-primary-dark) 100%);
+            color: white;
+            transition: var(--transition);
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-header {
+            padding: 25px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .sidebar-menu-item {
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-menu-item:hover, .sidebar-menu-item.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left-color: var(--kano-accent);
+        }
+        
+        .sidebar-menu-item i {
+            width: 20px;
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            transition: var(--transition);
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-nav-left h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--kano-primary);
+        }
+        
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--kano-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 30px;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border-top: 4px solid var(--kano-primary);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--kano-primary);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--kano-dark-light);
+            font-weight: 500;
+        }
+        
+        /* Dashboard Sections */
+        .dashboard-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--kano-border);
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            margin: 0;
+            color: var(--kano-primary);
+        }
+        
+        /* Vehicle Table */
+        .vehicle-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .vehicle-table th {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--kano-dark);
+            border-bottom: 1px solid var(--kano-border);
+        }
+        
+        .vehicle-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--kano-border);
+        }
+        
+        .vehicle-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-available { background: #d4edda; color: #155724; }
+        .status-assigned { background: #fff3cd; color: #856404; }
+        .status-maintenance { background: #f8d7da; color: #721c24; }
+        .status-decommissioned { background: #e2e3e5; color: #383d41; }
+        
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+        
+        .chart-placeholder {
+            height: 300px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--kano-dark-light);
+            font-size: 1.1rem;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            background: white;
+            border: 1px solid var(--kano-border);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--kano-dark);
+        }
+        
+        .action-btn:hover {
+            border-color: var(--kano-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .action-btn i {
+            font-size: 1.5rem;
+            color: var(--kano-primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Login Section */
+        .login-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--kano-primary) 0%, var(--kano-primary-dark) 100%);
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--kano-primary), var(--kano-primary-dark));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .login-body {
+            padding: 30px;
+        }
+        
+        .form-control {
+            border: 1px solid var(--kano-border);
+            border-radius: 8px;
+            padding: 12px 15px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--kano-primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 104, 55, 0.1);
+        }
+        
+        /* Enhanced Buttons */
+        .btn-kano {
+            background: linear-gradient(135deg, var(--kano-primary), var(--kano-primary-dark));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 104, 55, 0.25);
+        }
+        
+        .btn-kano:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 104, 55, 0.35);
+            color: white;
+        }
+        
+        .btn-outline-kano {
+            border: 2px solid var(--kano-primary);
+            color: var(--kano-primary);
+            background: transparent;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-outline-kano:hover {
+            background: var(--kano-primary);
+            color: white;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar-header span, .sidebar-menu-item span {
+                display: none;
+            }
+            
+            .sidebar-menu-item i {
+                margin-right: 0;
+                font-size: 1.3rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--kano-primary);
+            cursor: pointer;
+        }
+        
+        /* Utility Classes */
+        .text-success { color: var(--kano-secondary) !important; }
+        .text-warning { color: #ffc107 !important; }
+        .text-danger { color: #dc3545 !important; }
+        .text-info { color: #17a2b8 !important; }
+    </style>
+</head>
+<body>
+    <!-- Login Section (Initially Visible) -->
+    <section class="login-section" id="loginSection">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="login-card">
+                        <div class="login-header">
+                            <img src="kano_logo.jpg" alt="Kano State Logo" style="height: 60px; margin-bottom: 15px;">
+                            <h3><i class="fas fa-car me-2"></i> Fleet Dashboard</h3>
+                            <p class="mb-0">Office of the Secretary to the State Government</p>
+                        </div>
+                        <div class="login-body">
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+                                <button type="submit" class="btn btn-kano w-100">Login to Dashboard</button>
+                            </form>
+                            <div class="text-center mt-3">
+                                <a href="#" class="text-muted">Forgot your password?</a>
+                            </div>
+                            <div class="alert alert-danger mt-3 d-none" id="loginError">
+                                Invalid username or password. Please try again.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard (Initially Hidden) -->
+    <div class="dashboard-container d-none" id="dashboardContainer">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="d-flex align-items-center">
+                    <img src="kano_logo.jpg" alt="Kano State Logo" style="height: 40px; margin-right: 10px;">
+                    <span style="font-weight: 600;">Fleet Dashboard</span>
+                </div>
+                <small>SSG Office</small>
+            </div>
+            
+            <div class="sidebar-menu">
+                <a href="#" class="sidebar-menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <i class="fas fa-car"></i>
+                    <span>All Vehicles</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Vehicle Tracking</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <i class="fas fa-wrench"></i>
+                    <span>Maintenance</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Fuel Management</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu" style="position: absolute; bottom: 0; width: 100%;">
+                <a href="#" class="sidebar-menu-item" id="sidebarLogout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <div class="top-nav">
+                <div class="top-nav-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Vehicle Fleet Dashboard</h1>
+                </div>
+                <div class="top-nav-right">
+                    <div class="user-info">
+                        <div class="user-avatar" id="userAvatar">A</div>
+                        <div>
+                            <div id="userName">Administrator</div>
+                            <small id="userRole" class="text-muted">System Admin</small>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-kano btn-sm" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Stats Overview -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(0, 104, 55, 0.1); color: var(--kano-primary);">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="stat-number" id="totalVehicles">24</div>
+                        <div class="stat-label">Total Vehicles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(76, 175, 80, 0.1); color: var(--kano-secondary);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-number" id="availableVehicles">14</div>
+                        <div class="stat-label">Available</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(255, 193, 7, 0.1); color: #ffc107;">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="stat-number" id="assignedVehicles">8</div>
+                        <div class="stat-label">Assigned</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(220, 53, 69, 0.1); color: #dc3545;">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="stat-number" id="maintenanceVehicles">2</div>
+                        <div class="stat-label">Under Maintenance</div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <div class="section-header">
+                            <h3 class="section-title">Vehicle Utilization</h3>
+                            <div>
+                                <select class="form-select form-select-sm" style="width: auto;">
+                                    <option>Last 7 days</option>
+                                    <option>Last 30 days</option>
+                                    <option>Last 90 days</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-bar me-2"></i> Utilization Chart Would Appear Here
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="section-header">
+                            <h3 class="section-title">Vehicle Types</h3>
+                        </div>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-pie me-2"></i> Vehicle Type Distribution
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Vehicles Section -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h3 class="section-title">Recent Vehicle Activity</h3>
+                        <a href="#" class="btn btn-outline-kano btn-sm">View All Vehicles</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="vehicle-table">
+                            <thead>
+                                <tr>
+                                    <th>Plate Number</th>
+                                    <th>Vehicle</th>
+                                    <th>MDA</th>
+                                    <th>Driver</th>
+                                    <th>Status</th>
+                                    <th>Last Service</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vehicleTableBody">
+                                <!-- Vehicle data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h3 class="section-title">Quick Actions</h3>
+                    </div>
+                    <div class="quick-actions">
+                        <a href="#" class="action-btn" data-bs-toggle="modal" data-bs-target="#addVehicleModal">
+                            <i class="fas fa-plus-circle"></i>
+                            <div>Add New Vehicle</div>
+                        </a>
+                        <a href="#" class="action-btn">
+                            <i class="fas fa-file-export"></i>
+                            <div>Generate Report</div>
+                        </a>
+                        <a href="#" class="action-btn">
+                            <i class="fas fa-gas-pump"></i>
+                            <div>Fuel Log</div>
+                        </a>
+                        <a href="#" class="action-btn">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>Schedule Maintenance</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Vehicle Modal -->
+    <div class="modal fade" id="addVehicleModal" tabindex="-1" aria-labelledby="addVehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addVehicleModalLabel">Add New Vehicle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addVehicleForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="vehiclePlate" class="form-label">Plate Number *</label>
+                                <input type="text" class="form-control" id="vehiclePlate" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="vehicleMake" class="form-label">Make *</label>
+                                <input type="text" class="form-control" id="vehicleMake" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="vehicleModel" class="form-label">Model *</label>
+                                <input type="text" class="form-control" id="vehicleModel" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="vehicleYear" class="form-label">Year *</label>
+                                <input type="number" class="form-control" id="vehicleYear" min="2000" max="2025" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="vehicleType" class="form-label">Vehicle Type *</label>
+                                <select class="form-select" id="vehicleTypeModal" required>
+                                    <option value="">Select Type</option>
+                                    <option value="sedan">Sedan</option>
+                                    <option value="suv">SUV</option>
+                                    <option value="bus">Bus</option>
+                                    <option value="truck">Truck</option>
+                                    <option value="van">Van</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="vehicleMda" class="form-label">Assigned MDA *</label>
+                                <select class="form-select" id="vehicleMda" required>
+                                    <option value="">Select MDA</option>
+                                    <option value="ssg">SSG Office</option>
+                                    <option value="finance">Ministry of Finance</option>
+                                    <option value="health">Ministry of Health</option>
+                                    <option value="education">Ministry of Education</option>
+                                    <option value="works">Ministry of Works</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-kano" id="saveVehicleBtn">Add Vehicle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Script -->
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Authentication state
+            let isAuthenticated = false;
+            let currentUser = null;
+            
+            // Valid users (in a real application, this would be handled by a backend)
+            const validUsers = [
+                { username: 'admin', password: 'admin123', name: 'System Administrator', role: 'Admin', initial: 'A' },
+                { username: 'fleetmanager', password: 'fleet2025', name: 'Fleet Manager', role: 'Manager', initial: 'F' },
+                { username: 'ssgstaff', password: 'ssg2025', name: 'SSG Staff', role: 'User', initial: 'S' }
+            ];
+            
+            // Sample vehicle data
+            const vehicleData = [
+                {
+                    id: 1,
+                    plateNumber: "KN 001 ABC",
+                    make: "Toyota",
+                    model: "Camry",
+                    year: 2023,
+                    type: "sedan",
+                    mda: "ssg",
+                    status: "assigned",
+                    driver: "Malam Ibrahim",
+                    lastService: "2025-03-15",
+                    nextService: "2025-06-15",
+                    mileage: 12500
+                },
+                {
+                    id: 2,
+                    plateNumber: "KN 002 DEF",
+                    make: "Toyota",
+                    model: "Hilux",
+                    year: 2022,
+                    type: "truck",
+                    mda: "works",
+                    status: "available",
+                    driver: "",
+                    lastService: "2025-02-20",
+                    nextService: "2025-05-20",
+                    mileage: 18500
+                },
+                {
+                    id: 3,
+                    plateNumber: "KN 003 GHI",
+                    make: "Mercedes-Benz",
+                    model: "Sprinter",
+                    year: 2021,
+                    type: "van",
+                    mda: "health",
+                    status: "maintenance",
+                    driver: "Malam Sani",
+                    lastService: "2025-01-10",
+                    nextService: "2025-04-10",
+                    mileage: 32500
+                },
+                {
+                    id: 4,
+                    plateNumber: "KN 004 JKL",
+                    make: "Toyota",
+                    model: "Corolla",
+                    year: 2024,
+                    type: "sedan",
+                    mda: "finance",
+                    status: "assigned",
+                    driver: "Malam Ahmed",
+                    lastService: "2025-03-01",
+                    nextService: "2025-06-01",
+                    mileage: 8500
+                }
+            ];
+            
+            // Check if user is already logged in (from sessionStorage)
+            function checkAuthentication() {
+                const savedUser = sessionStorage.getItem('vehicleSystemUser');
+                if (savedUser) {
+                    const user = JSON.parse(savedUser);
+                    loginUser(user);
+                }
+            }
+            
+            // Login function
+            function loginUser(user) {
+                isAuthenticated = true;
+                currentUser = user;
+                
+                // Update UI
+                document.getElementById('loginSection').classList.add('d-none');
+                document.getElementById('dashboardContainer').classList.remove('d-none');
+                
+                // Update user info
+                document.getElementById('userName').textContent = user.name;
+                document.getElementById('userRole').textContent = user.role;
+                document.getElementById('userAvatar').textContent = user.initial;
+                
+                // Initialize dashboard
+                initializeDashboard();
+            }
+            
+            // Logout function
+            function logoutUser() {
+                isAuthenticated = false;
+                currentUser = null;
+                
+                // Update UI
+                document.getElementById('loginSection').classList.remove('d-none');
+                document.getElementById('dashboardContainer').classList.add('d-none');
+                
+                // Clear session storage
+                sessionStorage.removeItem('vehicleSystemUser');
+            }
+            
+            // Initialize dashboard
+            function initializeDashboard() {
+                // Update stats
+                updateStats();
+                
+                // Populate vehicle table
+                populateVehicleTable();
+                
+                // Add event listeners
+                document.getElementById('logoutBtn').addEventListener('click', logoutUser);
+                document.getElementById('sidebarLogout').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logoutUser();
+                });
+                
+                // Mobile menu toggle
+                document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+                    document.getElementById('sidebar').classList.toggle('mobile-open');
+                });
+                
+                // Add vehicle form
+                document.getElementById('saveVehicleBtn').addEventListener('click', function() {
+                    alert('Vehicle added successfully! (This is a demo)');
+                    // In a real application, you would handle the form submission here
+                });
+            }
+            
+            // Update dashboard statistics
+            function updateStats() {
+                const totalVehicles = vehicleData.length;
+                const availableVehicles = vehicleData.filter(v => v.status === 'available').length;
+                const assignedVehicles = vehicleData.filter(v => v.status === 'assigned').length;
+                const maintenanceVehicles = vehicleData.filter(v => v.status === 'maintenance').length;
+                
+                document.getElementById('totalVehicles').textContent = totalVehicles;
+                document.getElementById('availableVehicles').textContent = availableVehicles;
+                document.getElementById('assignedVehicles').textContent = assignedVehicles;
+                document.getElementById('maintenanceVehicles').textContent = maintenanceVehicles;
+            }
+            
+            // Populate vehicle table
+            function populateVehicleTable() {
+                const tableBody = document.getElementById('vehicleTableBody');
+                let html = '';
+                
+                vehicleData.forEach(vehicle => {
+                    const statusClass = `status-${vehicle.status}`;
+                    const mdaName = getMdaName(vehicle.mda);
+                    const formattedLastService = new Date(vehicle.lastService).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                    
+                    html += `
+                        <tr>
+                            <td><strong>${vehicle.plateNumber}</strong></td>
+                            <td>${vehicle.make} ${vehicle.model} (${vehicle.year})</td>
+                            <td>${mdaName}</td>
+                            <td>${vehicle.driver || 'Not assigned'}</td>
+                            <td><span class="status-badge ${statusClass}">${vehicle.status.toUpperCase()}</span></td>
+                            <td>${formattedLastService}</td>
+                            <td>
+                                <button class="btn btn-outline-kano btn-sm me-1" onclick="viewVehicle(${vehicle.id})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-kano btn-sm" onclick="editVehicle(${vehicle.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                tableBody.innerHTML = html;
+            }
+            
+            // Function to get MDA name from code
+            function getMdaName(mdaCode) {
+                const mdaNames = {
+                    'ssg': 'SSG Office',
+                    'finance': 'Ministry of Finance',
+                    'health': 'Ministry of Health',
+                    'education': 'Ministry of Education',
+                    'works': 'Ministry of Works'
+                };
+                return mdaNames[mdaCode] || 'Unknown MDA';
+            }
+            
+            // Login form submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const errorDiv = document.getElementById('loginError');
+                
+                // Validate credentials
+                const user = validUsers.find(u => u.username === username && u.password === password);
+                
+                if (user) {
+                    // Successful login
+                    errorDiv.classList.add('d-none');
+                    loginUser(user);
+                    
+                    // Save to session storage if "Remember me" is checked
+                    if (document.getElementById('rememberMe').checked) {
+                        sessionStorage.setItem('vehicleSystemUser', JSON.stringify(user));
+                    }
+                } else {
+                    // Failed login
+                    errorDiv.classList.remove('d-none');
+                }
+            });
+            
+            // Global functions for vehicle actions
+            window.viewVehicle = function(id) {
+                const vehicle = vehicleData.find(v => v.id === id);
+                if (vehicle) {
+                    alert(`Vehicle Details:\n\nPlate: ${vehicle.plateNumber}\nMake/Model: ${vehicle.make} ${vehicle.model}\nYear: ${vehicle.year}\nMDA: ${getMdaName(vehicle.mda)}\nStatus: ${vehicle.status}\nDriver: ${vehicle.driver || 'Not assigned'}\nLast Service: ${new Date(vehicle.lastService).toLocaleDateString()}\nMileage: ${vehicle.mileage.toLocaleString()} km`);
+                }
+            };
+            
+            window.editVehicle = function(id) {
+                alert('Edit functionality would be implemented in a full application. Vehicle ID: ' + id);
+            };
+            
+            // Check authentication on page load
+            checkAuthentication();
+        });
+    </script>
+</body>
+</html>
