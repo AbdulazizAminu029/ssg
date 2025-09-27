@@ -1719,3 +1719,190 @@
                     if (contactFormContainer.classList.contains('contact-form-visible')) {
                         this.innerHTML = '<i class="fas fa-map me-2"></i> Show Map';
                     }
+					                    } else {
+                        this.innerHTML = '<i class="fas fa-envelope me-2"></i> Contact Form';
+                    }
+                });
+            }
+
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    const spinner = submitButton.querySelector('.loading-spinner');
+                    
+                    // Show loading state
+                    submitButton.disabled = true;
+                    spinner.classList.remove('d-none');
+                    submitButton.innerHTML = '<span class="loading-spinner"></span> Sending...';
+                    
+                    // Simulate form submission
+                    setTimeout(function() {
+                        // Show success message
+                        showToast('Message sent successfully! We will get back to you soon.', 'success');
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Reset button
+                        submitButton.disabled = false;
+                        spinner.classList.add('d-none');
+                        submitButton.innerHTML = 'Send Message';
+                    }, 2000);
+                });
+            }
+
+            // Toast notification function
+            function showToast(message, type = 'info') {
+                const toastContainer = document.getElementById('toastContainer');
+                const toastId = 'toast-' + Date.now();
+                
+                const toastHtml = `
+                    <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0 mb-3" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                ${message}
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                `;
+                
+                toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+                
+                const toastElement = document.getElementById(toastId);
+                const toast = new bootstrap.Toast(toastElement, { delay: 5000 });
+                toast.show();
+                
+                // Remove toast from DOM after it's hidden
+                toastElement.addEventListener('hidden.bs.toast', function() {
+                    toastElement.remove();
+                });
+            }
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const searchTerm = this.value.trim();
+                        if (searchTerm) {
+                            showToast(`Searching for: ${searchTerm}`, 'info');
+                            // In a real implementation, you would redirect to a search results page
+                            // window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
+                        }
+                    }
+                });
+            }
+
+            // Skip to main content functionality
+            const skipLink = document.querySelector('a[href="#main-content"]');
+            if (skipLink) {
+                skipLink.addEventListener('click', function() {
+                    this.style.transform = 'translateY(0)';
+                    
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-100%)';
+                    }, 2000);
+                });
+            }
+
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Gallery lightbox functionality
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    const caption = this.querySelector('.gallery-caption').textContent;
+                    
+                    // Create lightbox modal
+                    const lightboxHtml = `
+                        <div class="modal fade" id="galleryLightbox" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content bg-transparent border-0">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img src="${imgSrc}" alt="${caption}" class="img-fluid rounded">
+                                        <p class="text-white mt-3">${caption}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Remove existing lightbox if any
+                    const existingLightbox = document.getElementById('galleryLightbox');
+                    if (existingLightbox) {
+                        existingLightbox.remove();
+                    }
+                    
+                    // Add new lightbox to DOM
+                    document.body.insertAdjacentHTML('beforeend', lightboxHtml);
+                    
+                    // Show the lightbox
+                    const lightbox = new bootstrap.Modal(document.getElementById('galleryLightbox'));
+                    lightbox.show();
+                });
+            });
+
+            // News ticker pause on hover
+            const newsTicker = document.querySelector('.news-ticker-content');
+            if (newsTicker) {
+                newsTicker.addEventListener('mouseenter', function() {
+                    this.style.animationPlayState = 'paused';
+                });
+                
+                newsTicker.addEventListener('mouseleave', function() {
+                    this.style.animationPlayState = 'running';
+                });
+            }
+
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Initialize AOS (Animate On Scroll) if available
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100
+                });
+            }
+        });
+
+        // Add print styles functionality
+        window.addEventListener('beforeprint', function() {
+            document.body.classList.add('printing');
+        });
+
+        window.addEventListener('afterprint', function() {
+            document.body.classList.remove('printing');
+        });
+    </script>
+</body>
+</html>
